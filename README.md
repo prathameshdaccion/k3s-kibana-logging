@@ -28,3 +28,9 @@ The second node of the cluster we’re going to set up is the data node that is 
 ###### Command
 
 $ kubectl apply -f es-data-cm.yaml -f es-data-svc.yaml -f es-data-dep.yaml
+
+The third node client is responsible for exposing an HTTP interface and pass queries to the data node.
+
+###### Command
+
+$ kubectl apply -f es-client-cm.yaml -f es-client-svc.yaml -f es-client-dep.yaml
