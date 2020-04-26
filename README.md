@@ -1,9 +1,7 @@
 # k3s-Logging with Elasticsearch-Metribeat-Kibana
 K3S logs have to be stored in centralized location
 
-ElasticSearch was selected as such centralized location
-
-Kibana can be used for data visualisation
+ElasticSearch was selected as such centralized location, Kibana is used for data visualisation
 
 Metricbeat is used as a DaemonSet to ensure we get a running metricbeat daemon on each node of the cluster.
 
