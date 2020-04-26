@@ -81,4 +81,3 @@ Note: You need to update elastic password in metribeat.yaml against below config
 $ kubectl apply -f metricbeat.yaml
 
 $ curl http://10.43.165.131:9200/_cat/indices -u elastic
-Enter host password for user 'elastic': << Enter password here >>
