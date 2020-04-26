@@ -54,3 +54,42 @@ $ kubectl create secret generic elasticsearch-pw-elastic -n infra --from-literal
 
 #### 2. Setup Kibana on your k3s setup
 
+Deploy Kibana and after a couple of minutes, check the logs for 
+
+###### Status changed from yellow to green
+
+###### Command
+
+$ kubectl apply -f kibana-cm.yaml -f kibana-svc.yaml -f kibana-dep.yaml -f kibana-ingress.yaml
+
+Once, the logs say “green”, you can access Kibana from your browser by ingress url. ( Update ingress host url as per your requirement )
+
+Login with username elastic and the password (previously generated and stored in a secret).
+
+#### 2. Setup Metricbeat on your k3s setup
+
+Deploy metribeat using below command and check list of indices in elasticsearch.
+Note: You need to update elastic password in metribeat.yaml against below configuration. Replace value of 43HzGXJmyMCqxX0uu8Rk with your password.
+
+    output.elasticsearch:
+      hosts: '${ELASTICSEARCH_HOSTS:http://elasticsearch-client.infra.svc.cluster.local:9200}'
+      username: '${ELASTICSEARCH_USERNAME:elastic}'
+      password: '${ELASTICSEARCH_PASSWORD:43HzGXJmyMCqxX0uu8Rk}'
+
+###### Command
+
+$ kubectl apply -f metricbeat.yaml
+
+$ curl http://10.43.165.131:9200/_cat/indices -u elastic
+Enter host password for user 'elastic': << Enter password here >>
+
+###### Output
+green  open .security-7                        wpVW2XG-Th2cmgpHUiY7cg 1 0   42 0 91.6kb 91.6kb
+green  open .monitoring-es-7-2020.04.26        Nt1DFsYSRUWzqEoR69YHFA 1 0   31 2    1mb    1mb
+green  open .kibana_task_manager_1             0s7AmrjGT1iG3uTp79X2kg 1 0    2 0   34kb   34kb
+green  open ilm-history-1-000001               PjCgZupnRtyDesFLdKC_TA 1 0    6 0 15.8kb 15.8kb
+green  open .apm-agent-configuration           RcXNyVQXRyGIO40Vn0P1WA 1 0    0 0   283b   283b
+yellow open metricbeat-7.6.2-2020.04.26-000001 _6if4jYRRT6KHwDOIy9i3g 1 1 4722 0  2.2mb  2.2mb
+green  open .monitoring-kibana-7-2020.04.26    cd25RoSmTUOocYJ-j8yIUA 1 0    5 0 59.6kb 59.6kb
+green  open .kibana_1                          qdBU9bmCRVSjat0rPdKWUw 1 0    3 0 15.4kb 15.4kb
+
