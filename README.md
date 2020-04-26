@@ -81,3 +81,13 @@ Note: You need to update elastic password in metribeat.yaml against below config
 $ kubectl apply -f metricbeat.yaml
 
 $ curl http://10.43.165.131:9200/_cat/indices -u elastic
+
+#### 4. Create index pattern in kibana for logging
+
+Now our setup is up and running, create an index pattern in kibana. 
+
+###### Go to Management > Kibana > Index Patterns and click on Create index pattern for your index of metricbeat. 
+
+You can see an aggregated view of all the logs printed from every pod in metribeat-* index. You can filter the logs by any 
+
+attributes attached to the log (for example a Kubernetes label) and navigate over the time.
