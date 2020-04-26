@@ -82,14 +82,3 @@ $ kubectl apply -f metricbeat.yaml
 
 $ curl http://10.43.165.131:9200/_cat/indices -u elastic
 Enter host password for user 'elastic': << Enter password here >>
-
-###### Output
-green  open .security-7                        wpVW2XG-Th2cmgpHUiY7cg 1 0   42 0 91.6kb 91.6kb
-green  open .monitoring-es-7-2020.04.26        Nt1DFsYSRUWzqEoR69YHFA 1 0   31 2    1mb    1mb
-green  open .kibana_task_manager_1             0s7AmrjGT1iG3uTp79X2kg 1 0    2 0   34kb   34kb
-green  open ilm-history-1-000001               PjCgZupnRtyDesFLdKC_TA 1 0    6 0 15.8kb 15.8kb
-green  open .apm-agent-configuration           RcXNyVQXRyGIO40Vn0P1WA 1 0    0 0   283b   283b
-yellow open metricbeat-7.6.2-2020.04.26-000001 _6if4jYRRT6KHwDOIy9i3g 1 1 4722 0  2.2mb  2.2mb
-green  open .monitoring-kibana-7-2020.04.26    cd25RoSmTUOocYJ-j8yIUA 1 0    5 0 59.6kb 59.6kb
-green  open .kibana_1                          qdBU9bmCRVSjat0rPdKWUw 1 0    3 0 15.4kb 15.4kb
-
