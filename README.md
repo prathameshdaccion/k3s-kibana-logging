@@ -1,1 +1,1 @@
-# This is an <K3S-Logging> tag
+# K3S-Logging
