@@ -14,3 +14,5 @@ You have a K3S environment
 You have namespace created with name infra or you can make the changes in yaml files as per your namespace requirement
 
 # Environment Setup
+
+#### 1. Setup Elasticsearch on your k3s setup
