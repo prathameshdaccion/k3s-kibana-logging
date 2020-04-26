@@ -34,3 +34,23 @@ The third node client is responsible for exposing an HTTP interface and pass que
 ###### Command
 
 $ kubectl apply -f es-client-cm.yaml -f es-client-svc.yaml -f es-client-dep.yaml
+
+After a couple of minutes, each node of the cluster should reconcile and the master node should log the following sentence:
+
+###### "Cluster health status changed from [YELLOW] to [GREEN]"
+
+###### Command
+
+$ kubectl logs -f -n infra $(kubectl get pods -n infra | grep elasticsearch-master | sed -n 1p | awk '{print $1}') \
+| grep "Cluster health status changed from \[YELLOW\] to \[GREEN\]"
+
+Now,Generate a password and store in a k3s secret.
+
+###### Command
+
+kubectl exec -it $(kubectl get pods -n infra | grep elasticsearch-client | sed -n 1p | awk '{print $1}') -n infra -- bin/elasticsearch-setup-passwords auto -b
+
+$ kubectl create secret generic elasticsearch-pw-elastic -n infra --from-literal password={elasticsearch-password}
+
+#### 2. Setup Kibana on your k3s setup
+
