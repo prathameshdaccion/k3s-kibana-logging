@@ -1,1 +1,1 @@
-# k3s-Logging with Elasticsearch-Kibana-Metribeat
+# k3s-Logging with Elasticsearch-Metribeat-Kibana
