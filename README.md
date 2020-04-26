@@ -16,3 +16,11 @@ You have namespace created with name infra or you can make the changes in yaml f
 # Environment Setup
 
 #### 1. Setup Elasticsearch on your k3s setup
+
+The first node of the cluster we’re going to set up is the master which is responsible for controlling the cluster.
+
+###### Command
+
+$ kubectl apply  -f es-master-cm.yaml \
+-f es-master-svc.yaml \
+-f es-master-dep.yaml
