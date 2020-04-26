@@ -21,6 +21,10 @@ The first node of the cluster we’re going to set up is the master which is res
 
 ###### Command
 
-$ kubectl apply  -f es-master-cm.yaml \
--f es-master-svc.yaml \
--f es-master-dep.yaml
+$ kubectl apply -f es-master-cm.yaml -f es-master-svc.yaml -f es-master-dep.yaml
+
+The second node of the cluster we’re going to set up is the data node that is responsible for hosting the data and executing the queries (CRUD, search, aggregation).
+
+###### Command
+
+$ kubectl apply -f es-data-cm.yaml -f es-data-svc.yaml -f es-data-dep.yaml
