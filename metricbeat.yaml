@@ -50,9 +50,9 @@ data:
       period: 10s
       hosts: ["${KUBE_STATE_METRICS_HOSTS}"]
     output.elasticsearch:
-      hosts: '${ELASTICSEARCH_HOSTS:http://elasticsearch-client.infra.svc.cluster.local:9200}'
-      username: '${ELASTICSEARCH_USERNAME:elastic}'
-      password: '${ELASTICSEARCH_PASSWORD:wdua5oOjBhxkbc6oKzJw}'
+      hosts: ['${ELASTICSEARCH_HOSTS:elasticsearch-client.infra.svc.cluster.local}:${ELASTICSEARCH_PORT:9200}']
+      username: '${ELASTICSEARCH_USER}'
+      password: '${ELASTICSEARCH_PASSWORD}'
       ssl.verification_mode: "none"
     
   metricbeat.yml: |
@@ -96,9 +96,9 @@ data:
       - drop_event.when.regexp:
           system.filesystem.mount_point: '^/(sys|cgroup|proc|dev|etc|host|lib)($|/)'
     output.elasticsearch:
-      hosts: '${ELASTICSEARCH_HOSTS:http://elasticsearch-client.infra.svc.cluster.local:9200}'
-      username: '${ELASTICSEARCH_USERNAME:elastic}'
-      password: '${ELASTICSEARCH_PASSWORD:wdua5oOjBhxkbc6oKzJw}'
+      hosts: ['${ELASTICSEARCH_HOSTS:elasticsearch-client.infra.svc.cluster.local}:${ELASTICSEARCH_PORT:9200}']
+      username: '${ELASTICSEARCH_USER}'
+      password: '${ELASTICSEARCH_PASSWORD}'
       ssl.verification_mode: "none"
 ---
 # Source: metricbeat/charts/kube-state-metrics/templates/clusterrole.yaml
@@ -398,6 +398,17 @@ spec:
             cpu: 100m
             memory: 100Mi
         env:
+        - name: ELASTICSEARCH_HOSTS
+          value: elasticsearch-client.infra.svc.cluster.local
+        - name: ELASTICSEARCH_PORT
+          value: "9200"
+        - name: ELASTICSEARCH_USER
+          value: elastic
+        - name: ELASTICSEARCH_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: elasticsearch-pw-elastic
+              key: password
         - name: POD_NAMESPACE
           valueFrom:
             fieldRef:
@@ -633,9 +644,11 @@ spec:
             memory: 100Mi
         env:
         - name: ELASTICSEARCH_HOSTS
-          value: "http://elasticsearch-client.infra.svc.cluster.local:9200"
+          value: elasticsearch-client.infra.svc.cluster.local
+        - name: ELASTICSEARCH_PORT
+          value: "9200"
         - name: ELASTICSEARCH_USER
-          value: "elastic"
+          value: elastic
         - name: ELASTICSEARCH_PASSWORD
           valueFrom:
             secretKeyRef:
