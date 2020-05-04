@@ -66,7 +66,7 @@ Once, the logs say “green”, you can access Kibana from your browser by ingre
 
 Login with username elastic and the password (previously generated and stored in a secret).
 
-#### 2. Setup Metricbeat on your k3s setup
+#### 3. Setup Metricbeat on your k3s setup
 
 Deploy metribeat using below command and check list of indices in elasticsearch.
 Note: You need to update elastic password in metribeat.yaml against below configuration. Replace value of 43HzGXJmyMCqxX0uu8Rk with your password.
