@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: infra
+  namespace: final
   name: elasticsearch-master
   labels:
     app: elasticsearch

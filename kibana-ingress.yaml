@@ -2,14 +2,14 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: kibana
-  namespace: infra
+  namespace: final
   labels:
     app: kibana
   annotations:
     kubernetes.io/ingress.class: traefik
 spec:
   rules:
-  - host: kibana.logging.oasis.com
+  - host: kibana.logging.my.com
     http:
       paths:
       - backend:

@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: infra
+  namespace: final
   name: kibana
   labels:
     app: kibana
@@ -24,7 +24,7 @@ spec:
           name: webinterface
         env:
         - name: ELASTICSEARCH_HOSTS
-          value: "http://elasticsearch-client.infra.svc.cluster.local:9200"
+          value: "http://elasticsearch-client.final.svc.cluster.local:9200"
         - name: ELASTICSEARCH_USER
           value: "elastic"
         - name: ELASTICSEARCH_PASSWORD
